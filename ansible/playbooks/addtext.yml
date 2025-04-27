@@ -1,0 +1,14 @@
+---
+- name: add text
+  hosts: all
+  tasks:
+    - name: create file
+      file:
+        path: /tmp/text
+        state: touch
+
+    - name: append text
+      blockinfile:
+        path: /tmp/text
+        block: Hello, World!!
+

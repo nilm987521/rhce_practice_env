@@ -1,0 +1,15 @@
+---
+- name: first
+  hosts: 
+    - rhce
+
+  tasks:
+    - name: "Install Apache"
+      yum:
+        name: httpd
+
+          
+    - name: "Start Apache"
+      service:
+        name: httpd
+        state: started

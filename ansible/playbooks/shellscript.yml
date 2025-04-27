@@ -1,0 +1,17 @@
+---
+- name: run shellscript
+  hosts: all
+  tasks:
+  - name: create file
+    file:
+      path: /tmp/myscript.sh
+      state: touch 
+      mode: 755
+
+  - name: write script
+    blockinfile: 
+      path: /tmp/myscript.sh
+      block: echo "Hello,World" > /tmp/result
+
+  - name: run script
+    shell: /tmp/myscript.sh

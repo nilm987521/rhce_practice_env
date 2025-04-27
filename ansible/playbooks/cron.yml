@@ -1,0 +1,14 @@
+---
+- name: create cron job
+  hosts: all
+  tasks:
+    - name: schedule cron
+      cron:
+        name: cron cron
+        minute: "*"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        user: root
+        job: "echo 'got away!!' | tee -a /tmp/result"

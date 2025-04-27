@@ -1,0 +1,29 @@
+---
+- name: download
+  hosts: all
+  tasks:
+    - name: create dir
+      file:
+        path: /opt/tomcat
+        state: directory
+        mode: 0755
+        owner: root
+        group: root
+
+    - name: download tomcat from url
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.100/bin/apache-tomcat-9.0.100.tar.gz
+        dest: /opt/tomcat/tomcat.tgz
+        mode: 0655
+        owner: root
+        group: root
+
+
+    - name: Extract foo.tgz into /var/lib/foo
+      unarchive:
+        src: /opt/tomcat/tomcat.tgz
+        remote_src: true
+        dest: /opt/tomcat
+
+
+

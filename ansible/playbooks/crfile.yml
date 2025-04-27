@@ -1,0 +1,29 @@
+---
+- name: create files
+  hosts: all
+  tasks:
+    - name: create dir
+      file:
+        path: /tmp/daniel_dir
+        owner: daniel
+        group: daniel
+        mode: 0777
+        state: directory
+    - name: create file
+      file:
+        path: /tmp/daniel_dir/file
+        owner: daniel
+        group: daniel
+        mode: 0777
+        state: touch
+    - name: check file exist
+      stat:
+        path: /tmp/daniel_dir/file
+      register: fs
+    - name: print result
+      debug:
+        msg: "aa {{ fs }}"
+    - name: remove file
+      file:
+        path: /tmp/daniel_dir
+        state: absent

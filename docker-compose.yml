@@ -1,0 +1,58 @@
+networks:
+  inet:
+    # 分離所有容器的port(因為System Queue)需要隔離，需要用bridge模式
+    driver: bridge
+    ipam:
+      config:
+       - subnet: 10.1.0.0/16
+         gateway: 10.1.0.1
+
+# volumes:
+
+services:
+  rh1:
+    image: rhce
+    container_name: rh1
+    hostname: RH1
+    cgroup_parent: docker.slice
+    cgroup: host
+    volumes:
+      - /Users/daniel/Documents/Personal/rhce/ansible:/etc/ansible:rw
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    tmpfs:
+        - /run
+        - /var/run
+        - /tmp
+    networks:
+      inet:
+        ipv4_address: 10.1.0.11
+
+  rh2:
+    image: rhce
+    container_name: rh2
+    hostname: RH2
+    cgroup_parent: docker.slice
+    cgroup: host
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    tmpfs:
+        - /run
+        - /var/run
+    networks:
+      inet:
+        ipv4_address: 10.1.0.12
+
+  rh3:
+    image: rhce
+    container_name: rh3
+    hostname: RH3
+    cgroup_parent: docker.slice
+    cgroup: host
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    tmpfs:
+        - /run
+        - /var/run
+    networks:
+      inet:
+        ipv4_address: 10.1.0.13

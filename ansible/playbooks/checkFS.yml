@@ -1,0 +1,12 @@
+---
+- name: File status module
+  hosts: localhost
+  tasks: 
+    - name: check file status and attirbutes
+      stat:
+        path: /etc/hosts
+      register: fs
+
+    - name: show result
+      debug: msg="aa   {{ fs }}"
+

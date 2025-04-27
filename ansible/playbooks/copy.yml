@@ -1,0 +1,19 @@
+---
+- name: "copy file from local to remote"
+  hosts: all
+  tasks:
+    - name: create user
+      user:
+        name: daniel
+        shell: /usr/bin/bash
+
+    - name: copy
+      become: true
+      copy:
+        src: /etc/ansible/playbooks
+        dest: /etc/ansible
+        owner: daniel
+        group: root
+        mode: 0600
+        follow: true
+

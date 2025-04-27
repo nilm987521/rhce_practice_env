@@ -1,0 +1,10 @@
+---
+- name: first
+  hosts: 
+    - localhost 
+    - 10.1.0.12
+    - 10.1.0.13
+
+  tasks:
+    - name: "test connections"
+      ping: 

@@ -1,0 +1,11 @@
+---
+- name: chmod
+  hosts: all
+  tasks: 
+    - name: chmod
+      file:
+        path: /etc/ansible/playbooks
+        mode: 0711
+        follow: true
+        owner: daniel
+        group: daniel
